@@ -7,7 +7,7 @@ var EL = React.createElement;
 var UserListDispatcher =
     require("../services/user-list-test-service.js");
 
-var Actions = require("../infrastructure/user-list-actions.js");
+var Dispatcher = require("../infrastructure/user-list-dispatcher.js");
 
 /**
  * props:
@@ -18,7 +18,7 @@ var UserListContainer = React.createClass({
         return {};
     },
     raiseSomeEvent: function() {
-        Actions.HandleTestAction("TEST@" + new Date());
+        Dispatcher.SendTest("TEST@" + new Date());
     },
     render: function () {
         return DOM.div({}, [

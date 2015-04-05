@@ -72,7 +72,7 @@
     <Content Include="src\user-list\components\user-list-container.js" />
     <Content Include="src\core\main.js" />
     <Content Include="src\common\base-dispatcher.js" />
-    <Content Include="src\user-list\infrastructure\user-list-actions.js" />
+    <Content Include="src\user-list\infrastructure\__unused_user-list-actions.js" />
     <Content Include="src\user-list\infrastructure\user-list-action-constants.js" />
     <Content Include="src\user-list\infrastructure\user-list-dispatcher.js" />
     <Content Include="src\user-list\services\user-list-test-service.js" />

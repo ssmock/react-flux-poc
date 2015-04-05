@@ -1,15 +1,25 @@
-﻿var baseDispatcher = require("../../common/base-dispatcher.js");
-var constants = require("./user-list-action-constants.js");
-//var merge = require('react/lib/merge');
+﻿var BaseDispatcher = require("../../common/base-dispatcher.js");
+var Constants = require("./user-list-command-constants.js");
 var _ = require("lodash");
 
-var UserListDispatcher = _.extend(baseDispatcher.prototype, {
-    HandleTestAction: function (action) {
+var UserListDispatcher = _.extend(BaseDispatcher.prototype, {
+    SendTest: function (arg) {
         this.dispatch({
-            Source: "HandleTestAction",
-            Action: action
+            Name: Constants.TEST_COMMAND,
+            Arg: arg
         });
     }
 });
+
+function getDispatch(commandName) {
+    var self = this;
+
+    return function (arg) {
+        self.dispatch({
+            Name: commandName,
+            Arg: arg
+        });
+    };
+}
 
 module.exports = UserListDispatcher;

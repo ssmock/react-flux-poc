@@ -4,10 +4,8 @@ var TestService = {
     DispatcherIndex: UserListDispatcher.register(handleAction)
 };
 
-function handleAction(payload) {
-    var action = payload.Action;
-      
-    console.log(action.Name + ":", action.Args);
+function handleAction(command) {      
+    console.log(command.Name + ":", command.Arg);
 }
 
 module.exports = TestService;

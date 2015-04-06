@@ -1,25 +1,15 @@
-﻿var BaseDispatcher = require("../../common/base-dispatcher.js");
-var Constants = require("./user-list-command-constants.js");
+﻿var BaseDispatcher = require("../../common/infrastructure/base-dispatcher.js");
+var Names = require("./user-list-command-names.js");
 var _ = require("lodash");
 
 var UserListDispatcher = _.extend(BaseDispatcher.prototype, {
-    SendTest: function (arg) {
+    GetList: function (search) {
         this.dispatch({
-            Name: Constants.TEST_COMMAND,
-            Arg: arg
+            Name: Names.GET_LIST,
+            Arg: search
         });
     }
 });
 
-function getDispatch(commandName) {
-    var self = this;
-
-    return function (arg) {
-        self.dispatch({
-            Name: commandName,
-            Arg: arg
-        });
-    };
-}
 
 module.exports = UserListDispatcher;

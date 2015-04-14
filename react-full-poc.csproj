@@ -70,21 +70,19 @@
     <Content Include="index.html" />
     <Content Include="Notes.txt" />
     <Content Include="src\common\components\loading.js" />
+    <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\user-list-container.js" />
     <Content Include="src\core\main.js" />
-    <Content Include="src\common\infrastructure\base-dispatcher.js" />
     <Content Include="src\user-list\components\user-list.js" />
-    <Content Include="src\user-list\infrastructure\user-list-command-names.js" />
-    <Content Include="src\user-list\infrastructure\user-list-dispatcher.js" />
-    <Content Include="src\user-list\services\user-list-service.js" />
+    <Content Include="src\user-list\components\user.js" />
+    <Content Include="src\user-list\infrastructure\user-list-actions.js" />
+    <Content Include="src\user-list\services\user-list-store.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\components\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

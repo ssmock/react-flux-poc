@@ -1,24 +1,29 @@
 ﻿var React = require("react");
+var Reflux = require("reflux");
 var _ = require("lodash");
 
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var Dispatcher = require("../infrastructure/user-list-dispatcher.js");
-var UserListService = require("../services/user-list-service.js");
+var UserListActions = require("../infrastructure/user-list-actions.js");
+var UserListStore = require("../services/user-list-store.js");
 
 var Loading = require("../../common/components/loading.js");
 var User = require("./user.js");
 
 var UserList = React.createClass({
+    mixins: [Reflux.ListenerMixin],
+
     getInitialState: function () {
         this.LoadList();
 
         return { Users: [] };
     },
+
     componentWillMount: function () {
-        UserListService.AddLoadedListener(this.ListLoaded);
+        this.listenTo(UserListStore, this.ListLoaded);
     },
+
     render: function () {
         var result;
 
@@ -33,13 +38,15 @@ var UserList = React.createClass({
 
         return result;
     },
+
     LoadList: function () {
         var search = {};
 
-        Dispatcher.GetList(search);
+        UserListActions.LoadUsers(search);
     },
+
     ListLoaded: function () {
-        var list = UserListService.GetList();
+        var list = UserListStore.GetList();
 
         this.setState({ Users: list });
     }

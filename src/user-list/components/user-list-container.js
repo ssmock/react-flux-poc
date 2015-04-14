@@ -4,14 +4,7 @@ var _ = require("lodash");
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var UserListService =
-    require("../services/user-list-service.js");
-
-var UserListDispatcher =
-    require("../infrastructure/user-list-dispatcher.js");
-
-var UserList =
-    require("./user-list.js");
+var UserList = require("./user-list.js");
 
 /**
  * props:

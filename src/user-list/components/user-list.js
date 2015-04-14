@@ -8,6 +8,7 @@ var Dispatcher = require("../infrastructure/user-list-dispatcher.js");
 var UserListService = require("../services/user-list-service.js");
 
 var Loading = require("../../common/components/loading.js");
+var User = require("./user.js");
 
 var UserList = React.createClass({
     getInitialState: function () {
@@ -15,14 +16,16 @@ var UserList = React.createClass({
 
         return { Users: [] };
     },
-    componentWillMount: function() {
+    componentWillMount: function () {
         UserListService.AddLoadedListener(this.ListLoaded);
     },
     render: function () {
         var result;
 
         if (this.state.Users.length) {
-            result = DOM.div({}, "YA");
+            var userElements = this.state.Users.map(toUserElement);
+
+            result = DOM.div({ key: "LIST" }, userElements);
         }
         else {
             result = EL(Loading);
@@ -31,15 +34,19 @@ var UserList = React.createClass({
         return result;
     },
     LoadList: function () {
-        console.log("LOAD LIST");
-
         var search = {};
 
         Dispatcher.GetList(search);
     },
-    ListLoaded: function (data) {
-        console.log("Loaded:", data);
+    ListLoaded: function () {
+        var list = UserListService.GetList();
+
+        this.setState({ Users: list });
     }
 });
+
+function toUserElement(user, index) {
+    return EL(User, { Data: user, key: user.id });
+}
 
 module.exports = UserList;

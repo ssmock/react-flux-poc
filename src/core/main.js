@@ -3,7 +3,8 @@
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var UserListContainer = require("../user-list/components/user-list-container.js");
+var UserListContainer =
+    require("../user-list/components/user-list-container.js");
 
 React.render(
     EL(UserListContainer, {}),

@@ -4,11 +4,16 @@ var _ = require("lodash");
 var DOM = React.DOM;
 var EL = React.createElement;
 
+var Modal = require("../../common/components/modal.js");
 var PostBox = require("./post-box.js");
+var AddPostBox = require("./add-post-box.js");
 
 var User = React.createClass({
     getInitialState: function () {
-        return { IsViewingPosts: false };
+        return {
+            IsViewingPosts: false,
+            IsAddingPost: this.props.User.id === 1
+        };
     },
 
     componentWillMount: function () {
@@ -19,21 +24,33 @@ var User = React.createClass({
         var result;
 
         var viewPosts;
-        var postBox;
+        var postBox = null;
+        var addBox = null;
 
         if (this.state.IsViewingPosts) {
             viewPosts = DOM.button({
                 onClick: this.HidePosts
             }, "Hide Posts");
 
-            postBox = EL(PostBox, { UserId: this.props.Data.id });
+            postBox = EL(PostBox, { User: this.props.User });
         }
         else {
             viewPosts = DOM.button({
                 onClick: this.ViewPosts
             }, "View Posts");
+        }
 
-            postBox = null;
+        if (this.state.IsAddingPost) {
+            addBox = EL(Modal, {
+                children: [
+                    EL(AddPostBox, {
+                        User: this.props.User,
+                        OnCancel: this.AddPostClosed,
+                        OnOk: this.AddPostClosed
+                    })
+                ],
+                obscureBackground: true
+            });
         }
 
         var addPost = DOM.button({
@@ -45,13 +62,14 @@ var User = React.createClass({
                 marginBottom: "10px"
             }
         }, [
-            getCell(50, this.props.Data.id),
-            getCell(200, this.props.Data.name),
-            getCell(200, this.props.Data.username),
-            getCell(200, this.props.Data.email),
+            getCell(50, this.props.User.id),
+            getCell(200, this.props.User.name),
+            getCell(200, this.props.User.username),
+            getCell(200, this.props.User.email),
             getCell(90, viewPosts),
             getCell(90, addPost),
-            postBox
+            postBox,
+            addBox
         ]);
 
         return result;
@@ -66,7 +84,11 @@ var User = React.createClass({
     },
 
     AddPost: function () {
-        alert("ADD IT");
+        this.setState({ IsAddingPost: true });
+    },
+
+    AddPostClosed: function () {
+        this.setState({ IsAddingPost: false });
     }
 });
 

@@ -59,7 +59,7 @@ var UserList = React.createClass({
 });
 
 function toUserElement(user, index) {
-    return EL(User, { Data: user, key: user.id });
+    return EL(User, { User: user, key: user.id });
 }
 
 module.exports = UserList;

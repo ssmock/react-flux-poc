@@ -70,6 +70,7 @@
     <Content Include="index.html" />
     <Content Include="Notes.txt" />
     <Content Include="src\common\components\loading.js" />
+    <Content Include="src\common\components\modal.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />
     <Content Include="src\user-list\components\user-list-container.js" />

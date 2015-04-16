@@ -1,7 +1,8 @@
 ﻿var Reflux = require("reflux");
 
 var UserListActions = Reflux.createActions([
-    "LoadUsers"
+    "LoadUsers",
+    "LoadUserPosts"
 ]);
 
 module.exports = UserListActions;

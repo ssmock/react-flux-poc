@@ -26,7 +26,7 @@ var UserList = React.createClass({
 
     render: function () {
         var result;
-
+        
         if (this.state.Users.length) {
             var userElements = this.state.Users.map(toUserElement);
 

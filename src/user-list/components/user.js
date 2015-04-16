@@ -10,9 +10,11 @@ var User = React.createClass({
     getInitialState: function () {
         return { IsViewingPosts: false };
     },
+
     componentWillMount: function () {
         // Wire up events
     },
+
     render: function () {
         var result;
 
@@ -45,9 +47,11 @@ var User = React.createClass({
 
         return result;
     },
+
     ViewPosts: function () {
         this.setState({ IsViewingPosts: true });
     },
+
     HidePosts: function () {
         this.setState({ IsViewingPosts: false });
     }

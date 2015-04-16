@@ -15,9 +15,13 @@ var User = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
-        this.LoadPosts();
+        var posts = UserPostStore.GetUserPosts(this.props.UserId);
 
-        return { Posts: [], Loaded: false };
+        if (!posts.length) {
+            this.LoadPosts();
+        }
+
+        return { Posts: posts || [], Loaded: false };
     },
 
     componentWillMount: function () {
@@ -35,8 +39,9 @@ var User = React.createClass({
 
             result = DOM.div({
                 style: {
+                    marginTop: "10px",
                     marginLeft: "50px",
-                    border: "1px solid #f00"
+                    border: "1px solid #888"
                 }
             }, postElements);
         }

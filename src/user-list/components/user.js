@@ -36,12 +36,21 @@ var User = React.createClass({
             postBox = null;
         }
 
-        result = DOM.div({}, [
+        var addPost = DOM.button({
+            onClick: this.AddPost
+        }, "Add Post");
+
+        result = DOM.div({
+            style: {
+                marginBottom: "10px"
+            }
+        }, [
             getCell(50, this.props.Data.id),
             getCell(200, this.props.Data.name),
             getCell(200, this.props.Data.username),
             getCell(200, this.props.Data.email),
-            getCell(200, viewPosts),
+            getCell(90, viewPosts),
+            getCell(90, addPost),
             postBox
         ]);
 
@@ -54,6 +63,10 @@ var User = React.createClass({
 
     HidePosts: function () {
         this.setState({ IsViewingPosts: false });
+    },
+
+    AddPost: function () {
+        alert("ADD IT");
     }
 });
 

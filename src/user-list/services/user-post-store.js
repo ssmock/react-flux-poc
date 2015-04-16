@@ -21,7 +21,6 @@ var UserListStore = Reflux.createStore({
                 return response.json();
             })
             .then(function (json) {
-                console.log("It could.", userId, json);
                 replacePostsFor(userId, json);
 
                 self.trigger(userId);
@@ -36,9 +35,9 @@ var UserListStore = Reflux.createStore({
     },
 
     GetUserPosts: function (userId) {
-        return [
-            { userId: 123, id: 987, title: "TEST STUFF", body: "TEST BODY" },
-            { userId: 123, id: 654, title: "TEST MOAR STUFF", body: "TEST ANOTHER BODY" }];
+        var result = posts.filter(isForUser(userId));
+
+        return result;
     }
 });
 
@@ -50,8 +49,14 @@ function replacePostsFor(userId, json) {
 
 function isNotForUser(userId) {
     return function (post) {
-        post.userId !== userId;
+        return post.userId !== userId;
     };
+}
+
+function isForUser(userId) {
+    return function (post) {
+        return post.userId === userId;
+    }
 }
 
 module.exports = UserListStore;

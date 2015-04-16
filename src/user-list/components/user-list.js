@@ -26,11 +26,17 @@ var UserList = React.createClass({
 
     render: function () {
         var result;
-        
+
         if (this.state.Users.length) {
             var userElements = this.state.Users.map(toUserElement);
 
-            result = DOM.div({ key: "LIST" }, userElements);
+            result = DOM.div({
+                key: "LIST",
+                style: {
+                    fontFamily: "Consolas",
+                    fontSize: "10pt"
+                }
+            }, userElements);
         }
         else {
             result = EL(Loading);

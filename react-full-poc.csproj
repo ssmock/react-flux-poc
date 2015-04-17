@@ -71,6 +71,11 @@
     <Content Include="Notes.txt" />
     <Content Include="src\common\components\loading.js" />
     <Content Include="src\common\components\modal.js" />
+    <Content Include="src\core\core-actions.js" />
+    <Content Include="src\core\router\route-config.js" />
+    <Content Include="src\core\router\route-change-message.js" />
+    <Content Include="src\core\router\router.js" />
+    <Content Include="src\core\router\make-route-change-message.js" />
     <Content Include="src\user-list\components\add-post-box.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />
@@ -81,6 +86,7 @@
     <Content Include="src\user-list\infrastructure\user-list-actions.js" />
     <Content Include="src\user-list\stores\user-post-store.js" />
     <Content Include="src\user-list\stores\user-list-store.js" />
+    <Content Include="src\user\components\user-detail.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

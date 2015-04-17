@@ -12,7 +12,7 @@ var User = React.createClass({
     getInitialState: function () {
         return {
             IsViewingPosts: false,
-            IsAddingPost: this.props.User.id === 1
+            IsAddingPost: false
         };
     },
 

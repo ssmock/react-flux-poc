@@ -6,7 +6,7 @@ var DOM = React.DOM;
 var EL = React.createElement;
 
 var UserListActions = require("../infrastructure/user-list-actions.js");
-var UserListStore = require("../services/user-list-store.js");
+var UserListStore = require("../stores/user-list-store.js");
 
 var Loading = require("../../common/components/loading.js");
 var User = require("./user.js");

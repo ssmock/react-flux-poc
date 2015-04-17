@@ -71,6 +71,7 @@
     <Content Include="Notes.txt" />
     <Content Include="src\common\components\loading.js" />
     <Content Include="src\common\components\modal.js" />
+    <Content Include="src\user-list\components\add-post-box.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />
     <Content Include="src\user-list\components\user-list-container.js" />
@@ -78,8 +79,8 @@
     <Content Include="src\user-list\components\user-list.js" />
     <Content Include="src\user-list\components\user.js" />
     <Content Include="src\user-list\infrastructure\user-list-actions.js" />
-    <Content Include="src\user-list\services\user-post-store.js" />
-    <Content Include="src\user-list\services\user-list-store.js" />
+    <Content Include="src\user-list\stores\user-post-store.js" />
+    <Content Include="src\user-list\stores\user-list-store.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

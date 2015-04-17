@@ -6,7 +6,7 @@ var DOM = React.DOM;
 var EL = React.createElement;
 
 var UserListActions = require("../infrastructure/user-list-actions.js");
-var UserPostStore = require("../services/user-post-store.js");
+var UserPostStore = require("../stores/user-post-store.js");
 
 var Loading = require("../../common/components/loading.js");
 var Post = require("./post.js");
@@ -15,7 +15,7 @@ var User = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
-        var posts = UserPostStore.GetUserPosts(this.props.UserId);
+        var posts = UserPostStore.GetUserPosts(this.props.User.id);
 
         if (!posts.length) {
             this.LoadPosts();
@@ -50,12 +50,12 @@ var User = React.createClass({
     },
 
     LoadPosts: function () {
-        UserListActions.LoadUserPosts(this.props.UserId);
+        UserListActions.LoadUserPosts(this.props.User.id);
     },
 
     PostsLoaded: function (userId) {
-        if (this.props.UserId === userId) {
-            var posts = UserPostStore.GetUserPosts(this.props.UserId);
+        if (this.props.User.id === userId) {
+            var posts = UserPostStore.GetUserPosts(this.props.User.id);
 
             this.setState({ Posts: posts });
         }
@@ -63,7 +63,7 @@ var User = React.createClass({
 });
 
 function toPostElement(post) {
-    return EL(Post, { Data: post, key: post.id });
+    return EL(Post, { Post: post, key: post.id });
 }
 
 module.exports = User;

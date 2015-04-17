@@ -1,19 +1,27 @@
 ﻿var React = require("react");
 var _ = require("lodash");
 
+console.log("Addons", React.addons);
+
+var UserListActions = require("../infrastructure/user-list-actions.js");
+
 var DOM = React.DOM;
 var EL = React.createElement;
 
 var AddPost = React.createClass({
     getInitialState: function () {
-        return { CanClose: true };
+        return {
+            CanClose: true,
+            Title: "",
+            Body: ""
+        };
     },
 
     render: function () {
         return DOM.div({}, [
             getHeader(this.props.User),
-            getTitle(),
-            getBody(),
+            getTitle.bind(this)(),
+            getBody.bind(this)(),
             getButtons.bind(this)()
         ]);
     },
@@ -23,7 +31,24 @@ var AddPost = React.createClass({
     },
 
     Ok: function () {
+        UserListActions.AddUserPost({
+            userId: this.props.User.id,
+            id: 0,
+            title: this.state.Title,
+            body: this.state.Body
+        });
+
         this.props.OnOk();
+    },
+
+    BindState: function (name) {
+        return (function (e) {
+            var arg = {};
+
+            arg[name] = e.target.value;
+
+            this.setState(arg);
+        }).bind(this);
     }
 });
 
@@ -45,7 +70,8 @@ function getTitle() {
         }, [
             DOM.textarea({
                 rows: "2",
-                cols: "50"
+                cols: "50",
+                onChange: this.BindState("Title")
             }, "")
         ])
     ]);
@@ -61,7 +87,8 @@ function getBody() {
         }, [
             DOM.textarea({
                 rows: "8",
-                cols: "50"
+                cols: "50",
+                onChange: this.BindState("Body")
             }, "")
         ])
     ]);

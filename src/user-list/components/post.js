@@ -15,10 +15,10 @@ var Post = React.createClass({
             }
         }, [
             DOM.div({}, [
-                getCell(100, this.props.Data.userId + "." + this.props.Data.id),
-                getCell(350, this.props.Data.title),
+                getCell(100, this.props.Post.userId + "." + this.props.Post.id),
+                getCell(350, this.props.Post.title),
             ]),
-            getCell(500, this.props.Data.body, 100),
+            getCell(500, this.props.Post.body, 100),
         ]);
 
         return result;

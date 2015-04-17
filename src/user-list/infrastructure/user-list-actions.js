@@ -2,7 +2,8 @@
 
 var UserListActions = Reflux.createActions([
     "LoadUsers",
-    "LoadUserPosts"
+    "LoadUserPosts",
+    "AddUserPost"
 ]);
 
 module.exports = UserListActions;

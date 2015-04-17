@@ -13,7 +13,9 @@ var UserListStore = Reflux.createStore({
     LoadUsers: function (search) {
         var self = this;
 
-        fetch("http://jsonplaceholder.typicode.com/users")
+        var url = "http://jsonplaceholder.typicode.com/users";
+
+        fetch(url)
             .then(function (response) {
                 return response.json();
             })

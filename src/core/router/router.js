@@ -31,13 +31,15 @@ function makeRoute(source) {
     return route;
 }
 
-console.log(routeSetup);
-
 Router = Director.Router(routeSetup);
 
 Router.notFound = function () {
     UserListActions.RouteNotFound();
-}
+};
+
+Router.GetCurrentRoute = function () {
+    return MakeRouteChangeMessage(Router.getRoute());
+};
 
 Router.init();
 

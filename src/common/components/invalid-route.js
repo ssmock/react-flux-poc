@@ -1,16 +1,15 @@
 ﻿var React = require("react");
-var _ = require("lodash");
 
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var Loading = React.createClass({
+var InvalidRoute = React.createClass({
     getInitialState: function () {
         return {};
     },
     render: function () {
-        return DOM.div({}, "LOADING...");
+        return DOM.div({}, "INVALID ROUTE");
     }
 });
 
-module.exports = Loading;
+module.exports = InvalidRoute;

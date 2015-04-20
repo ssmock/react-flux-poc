@@ -4,13 +4,13 @@ var _ = require("lodash");
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var Loading = React.createClass({
+var UserList = React.createClass({
     getInitialState: function () {
         return {};
     },
     render: function () {
-        return DOM.div({}, "LOADING...");
+        return DOM.div({}, "Contact me.");
     }
 });
 
-module.exports = Loading;
+module.exports = UserList;

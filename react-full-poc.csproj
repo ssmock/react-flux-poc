@@ -68,10 +68,12 @@
   <ItemGroup>
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
-    <Content Include="Notes.txt" />
     <Content Include="src\common\components\loading.js" />
     <Content Include="src\common\components\modal.js" />
+    <Content Include="src\contact\components\contact.js" />
     <Content Include="src\core\core-actions.js" />
+    <Content Include="src\core\get-component-for-route.js" />
+    <Content Include="src\core\route-state-store.js" />
     <Content Include="src\core\router\route-config.js" />
     <Content Include="src\core\router\route-change-message.js" />
     <Content Include="src\core\router\router.js" />

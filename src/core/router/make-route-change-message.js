@@ -23,6 +23,8 @@ function getQueryValues(route) {
 }
 
 function withoutQueryString(route) {
+    var lastIndex = route.length - 1;
+
     return route[lastIndex].split("?")[0];
 }
 

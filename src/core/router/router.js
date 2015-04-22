@@ -38,8 +38,20 @@ Router.notFound = function () {
 };
 
 Router.GetCurrentRoute = function () {
-    return MakeRouteChangeMessage(Router.getRoute());
+    var route = Router.getRoute();
+
+    var message = MakeRouteChangeMessage(route);
+
+    return message;
 };
+
+Router.GetInitialRoute = function () {
+    var route = [_.keys(RouteConfig)[0]];
+
+    var message = MakeRouteChangeMessage(route);
+
+    return message;
+}
 
 Router.init();
 

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
+    <Content Include="src\common\components\invalid-route.js" />
     <Content Include="src\common\components\loading.js" />
     <Content Include="src\common\components\modal.js" />
     <Content Include="src\contact\components\contact.js" />

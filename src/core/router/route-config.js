@@ -1,5 +1,5 @@
 ﻿var routes = {
-    "": null,
+    "user-list": null, // Convention: initial route
     "user": {
         ":id": null
     },

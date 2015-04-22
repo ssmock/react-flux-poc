@@ -2,9 +2,9 @@
 var Reflux = require("reflux");
 
 var CoreActions = require("./core-actions.js");
-var GetCurrentRoute = require("./router/router.js").GetCurrentRoute;
+var Router = require("./router/router.js");
 
-var currentState = toCurrentState(GetCurrentRoute());
+var currentState = toCurrentState(Router.GetInitialRoute());
 
 var RouteStateStore = Reflux.createStore({
     init: function () {
@@ -13,7 +13,7 @@ var RouteStateStore = Reflux.createStore({
     },
 
     RouteChanged: function (routeChangedMessage) {
-        currentState = toCurrentState(GetCurrentRoute());
+        currentState = toCurrentState(Router.GetCurrentRoute());
 
         this.trigger(currentState);
     },

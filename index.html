@@ -2,8 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <style>
+        body > div {
+            display: inline-block;
+            vertical-align: top;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        #Main {
+            min-width: 840px;
+            min-height: 280px;
+        }
+
+        #Menu ul {
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div id="Menu">
+        <ul>
+            <li>
+                <a href="#user-list">Users</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+        </ul>
+    </div>
     <div id="Main"></div>
     <script src="dist/main.bundle.js"></script>
 </body>

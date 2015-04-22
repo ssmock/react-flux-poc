@@ -1,8 +1,6 @@
 ﻿var React = require("react");
 var _ = require("lodash");
 
-console.log("Addons", React.addons);
-
 var UserListActions = require("../infrastructure/user-list-actions.js");
 
 var DOM = React.DOM;

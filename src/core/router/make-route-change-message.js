@@ -7,7 +7,7 @@ function makeRouteChangeMessage(route) {
 
     route[lastIndex] = withoutQueryString(route);
 
-    return new RouteChangeMessage(route, queryValues)
+    return new RouteChangeMessage(route, queryValues);
 }
 
 function getQueryValues(route) {

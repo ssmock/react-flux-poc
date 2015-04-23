@@ -9,13 +9,18 @@ var webpack = require("webpack");
 
 // For common chunks, like vendor.
 var commonsChunk = webpack.optimize.CommonsChunkPlugin;
+var vendorChunk = {
+    // For webpack config.entry.
+    modules: ["react", "reflux", "director", "lodash", "query-string"],
+    // For webpack config.plugins
+    // If this changes, be sure to update its references!
+    fileName: "vendor.201504231722.js"
+};
 
 function getWebpackConfig(options) {
     return {
         entry: {
-            // Our "lib" entry point.  Also a common chunk; see plugins, below.
-            //lib: ["underscore", "director", "whatwg-fetch", "react"],
-            // Modules.
+            vendor: vendorChunk.modules,
             main: "./src/core/main.js"
         },
         output: {
@@ -23,13 +28,11 @@ function getWebpackConfig(options) {
             publicPath: "dist/",
             filename: "[name].bundle.js"
         },
-        //plugins: [
-        //    new commonsChunk(
-        //        "lib",
-        //        "lib.js")
-        //],
+        plugins: [
+            new commonsChunk("vendor", vendorChunk.fileName)
+        ],
         resolve: {
-            modulesDirectories: ["node_modules"] //, "src/core"]
+            modulesDirectories: ["node_modules"]
         },
         loaders: [
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }

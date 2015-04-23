@@ -71,6 +71,7 @@
     <Content Include="src\common\components\invalid-route.js" />
     <Content Include="src\common\components\loading.js" />
     <Content Include="src\common\components\modal.js" />
+    <Content Include="src\about\components\about.js" />
     <Content Include="src\contact\components\contact.js" />
     <Content Include="src\core\core-actions.js" />
     <Content Include="src\core\get-component-for-route.js" />
@@ -82,7 +83,6 @@
     <Content Include="src\user-list\components\add-post-box.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />
-    <Content Include="src\user-list\components\user-list-container.js" />
     <Content Include="src\core\main.js" />
     <Content Include="src\user-list\components\user-list.js" />
     <Content Include="src\user-list\components\user.js" />
@@ -90,6 +90,8 @@
     <Content Include="src\user-list\stores\user-post-store.js" />
     <Content Include="src\user-list\stores\user-list-store.js" />
     <Content Include="src\user\components\user-detail.js" />
+    <Content Include="src\user\infrastructure\user-detail-actions.js" />
+    <Content Include="src\user\stores\user-detail-store.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

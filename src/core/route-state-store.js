@@ -4,7 +4,7 @@ var Reflux = require("reflux");
 var CoreActions = require("./core-actions.js");
 var Router = require("./router/router.js");
 
-var currentState = toCurrentState(Router.GetInitialRoute());
+var currentState = toCurrentState(Router.GetCurrentRoute());
 
 var RouteStateStore = Reflux.createStore({
     init: function () {

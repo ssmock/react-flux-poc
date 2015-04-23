@@ -4,8 +4,6 @@
  */
 function GetComponentForRoute(routeState) {
     var result = null;
-    console.log("MACROSS");
-
 
     if (routeState.hasOwnProperty("Segments")) {
         if (routeState.Segments.length > 0) {

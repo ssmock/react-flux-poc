@@ -4,8 +4,6 @@ var Reflux = require("reflux");
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var UserListContainer =
-    require("../user-list/components/user-list-container.js");
 var Contact = require("../contact/components/contact.js");
 var InvalidRoute = require("../common/components/invalid-route.js");
 
@@ -48,6 +46,7 @@ var Main = React.createClass({
             //
             // TODO: Handle this.
             //
+
             alert("Route not found!");
         }
     }

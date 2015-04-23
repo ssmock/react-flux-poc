@@ -15,6 +15,11 @@ var UserList = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
+        //
+        // TODO: Only load the list if the props indicate a different query
+        // for the user list store.
+        //
+
         this.LoadList();
 
         return { Users: [] };

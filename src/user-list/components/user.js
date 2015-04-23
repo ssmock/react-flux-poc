@@ -62,8 +62,9 @@ var User = React.createClass({
                 marginBottom: "10px"
             }
         }, [
-            getCell(50, this.props.User.id),
-            getCell(200, this.props.User.name),
+            getCell(50, getDetailLink(this.props.User.id, this.props.User.id)),
+            getCell(200, 
+                getDetailLink(this.props.User.name, this.props.User.id)),
             getCell(200, this.props.User.username),
             getCell(200, this.props.User.email),
             getCell(90, viewPosts),
@@ -99,6 +100,12 @@ function getCell(width, content) {
             width: width + "px"
         }
     }, content);
+}
+
+function getDetailLink(text, userId) {
+    return DOM.a({
+        href: "#user/" + userId
+    }, text);
 }
 
 module.exports = User;

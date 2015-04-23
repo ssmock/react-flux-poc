@@ -25,7 +25,7 @@ var UserListStore = Reflux.createStore({
                 self.trigger(userList);
             })
             .catch(function (ex) {
-                console.log("BAD:", ex);
+                console.log("GET LIST FAILED:", ex);
             });
     },
 

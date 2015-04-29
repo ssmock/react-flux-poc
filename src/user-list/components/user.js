@@ -15,11 +15,7 @@ var User = React.createClass({
             IsAddingPost: false
         };
     },
-
-    componentWillMount: function () {
-        // Wire up events
-    },
-
+    
     render: function () {
         var result;
 

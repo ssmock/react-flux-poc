@@ -7,48 +7,41 @@ var EL = React.createElement;
 var Contact = require("../contact/components/contact.js");
 var InvalidRoute = require("../common/components/invalid-route.js");
 
-var RouteStateStore = require("./route-state-store.js");
-
-var GetComponentForRoute = require("./get-component-for-route.js");
+var MainComponentStore = require("./main-component-store.js");
 
 var Main = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
-        return { RouteState: RouteStateStore.GetState() };
+        return {
+            ComponentState: MainComponentStore.GetCurrentComponentState()
+        };
     },
 
     componentWillMount: function () {
-        this.listenTo(RouteStateStore, this.RouteChanged);
+        this.listenTo(MainComponentStore, this.MainComponentChanged);
+
+        var routeState = this.state.ComponentState.RouteState;
+
+        if (routeState.Segments[0] === "") {
+            MainComponentStore.LoadComponentState();
+        }
     },
 
     render: function () {
         var result;
 
-        //
-        // TODO: Lazy load resources based on the route.
-        //
-
-        component = GetComponentForRoute(this.state.RouteState);
-
-        if (component) {
-            result = EL(component, { RouteState: this.state.RouteState });
-        }        
+        if (this.state.ComponentState.Component) {
+            result = EL(this.state.ComponentState.Component, {
+                RouteState: this.state.ComponentState.RouteState
+            });
+        }
 
         return result;
     },
 
-    RouteChanged: function (state) {
-        if (state.hasOwnProperty("Segments")) {
-            this.setState({ RouteState: state })
-        }
-        else {
-            //
-            // TODO: Handle this.
-            //
-
-            alert("Route not found!");
-        }
+    MainComponentChanged: function (componentState) {
+        this.setState({ ComponentState: componentState });
     }
 });
 

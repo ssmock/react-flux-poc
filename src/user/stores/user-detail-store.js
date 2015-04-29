@@ -13,8 +13,6 @@ var UserDetailStore = Reflux.createStore({
     LoadDetail: function (userId) {
         var self = this;
 
-        console.log(userId);
-
         var url = "http://jsonplaceholder.typicode.com/users/" + userId;
 
         fetch(url)

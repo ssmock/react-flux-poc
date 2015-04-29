@@ -73,6 +73,7 @@
     <Content Include="src\common\components\modal.js" />
     <Content Include="src\about\components\about.js" />
     <Content Include="src\contact\components\contact.js" />
+    <Content Include="src\core\component-loader-store.js" />
     <Content Include="src\core\core-actions.js" />
     <Content Include="src\core\get-component-for-route.js" />
     <Content Include="src\core\route-state-store.js" />

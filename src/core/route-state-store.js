@@ -1,5 +1,4 @@
-﻿require("whatwg-fetch"); // Global
-var Reflux = require("reflux");
+﻿var Reflux = require("reflux");
 
 var CoreActions = require("./core-actions.js");
 var Router = require("./router/router.js");

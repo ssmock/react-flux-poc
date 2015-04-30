@@ -81,7 +81,7 @@
     <Content Include="src\core\router\route-change-message.js" />
     <Content Include="src\core\router\router.js" />
     <Content Include="src\core\router\make-route-change-message.js" />
-    <Content Include="src\common\types\component-base\user-base.js" />
+    <Content Include="src\user-list\component-base\user-component-base.js" />
     <Content Include="src\user-list\components\add-post-box.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />
@@ -99,7 +99,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\common\types\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

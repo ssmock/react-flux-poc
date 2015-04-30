@@ -5,49 +5,19 @@ var DOM = React.DOM;
 var EL = React.createElement;
 
 var UserComponentBase =
-    require("../../common/types/component-base/user-component-base.js");
+    require("../component-base/user-component-base.js");
 
 var Modal = require("../../common/components/modal.js");
-var PostBox = require("./post-box.js");
 var AddPostBox = require("./add-post-box.js");
 
 var config = _.extend(UserComponentBase, {
     render: function () {
         var result;
 
-        var viewPosts;
-        var postBox = null;
-        var addBox = null;
-
-        if (this.state.IsViewingPosts) {
-            viewPosts = DOM.button({
-                onClick: this.HidePosts
-            }, "Hide Posts");
-
-            postBox = EL(PostBox, { User: this.props.User });
-        }
-        else {
-            viewPosts = DOM.button({
-                onClick: this.ViewPosts
-            }, "View Posts");
-        }
-
-        if (this.state.IsAddingPost) {
-            addBox = EL(Modal, {
-                children: [
-                    EL(AddPostBox, {
-                        User: this.props.User,
-                        OnCancel: this.AddPostClosed,
-                        OnOk: this.AddPostClosed
-                    })
-                ],
-                obscureBackground: true
-            });
-        }
-
-        var addPost = DOM.button({
-            onClick: this.AddPost
-        }, "Add Post");
+        var postBox = this.GetPostBox();
+        var viewPostsButton = this.GetViewPostsButton();
+        var addBox = this.GetAddBox();
+        var addPostButton = this.GetAddPostButton();
 
         result = DOM.div({
             style: {
@@ -59,8 +29,8 @@ var config = _.extend(UserComponentBase, {
                 getDetailLink(this.props.User.name, this.props.User.id)),
             getCell(200, this.props.User.username),
             getCell(200, this.props.User.email),
-            getCell(90, viewPosts),
-            getCell(90, addPost),
+            getCell(90, viewPostsButton),
+            getCell(90, addPostButton),
             postBox,
             addBox
         ]);

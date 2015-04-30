@@ -11,7 +11,7 @@ var UserPostStore = require("../stores/user-post-store.js");
 var Loading = require("../../common/components/loading.js");
 var Post = require("./post.js");
 
-var User = React.createClass({
+var PostBox = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
@@ -66,4 +66,4 @@ function toPostElement(post) {
     return EL(Post, { Post: post, key: post.id });
 }
 
-module.exports = User;
+module.exports = PostBox;

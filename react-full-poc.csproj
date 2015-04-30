@@ -73,14 +73,15 @@
     <Content Include="src\common\components\modal.js" />
     <Content Include="src\about\components\about.js" />
     <Content Include="src\contact\components\contact.js" />
-    <Content Include="src\core\component-loader-store.js" />
+    <Content Include="src\core\route-loader.js" />
+    <Content Include="src\core\main-component-store.js" />
     <Content Include="src\core\core-actions.js" />
-    <Content Include="src\core\get-component-for-route.js" />
     <Content Include="src\core\route-state-store.js" />
     <Content Include="src\core\router\route-config.js" />
     <Content Include="src\core\router\route-change-message.js" />
     <Content Include="src\core\router\router.js" />
     <Content Include="src\core\router\make-route-change-message.js" />
+    <Content Include="src\common\types\component-base\user-base.js" />
     <Content Include="src\user-list\components\add-post-box.js" />
     <Content Include="src\user-list\components\post-box.js" />
     <Content Include="src\user-list\components\post.js" />

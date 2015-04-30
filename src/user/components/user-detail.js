@@ -9,12 +9,15 @@ var DIV = DOM.div;
 var UserDetailActions = require("../infrastructure/user-detail-actions.js");
 var UserDetailStore = require("../stores/user-detail-store.js");
 
+var UserComponentBase =
+    require("../../common/types/component-base/user-component-base.js");
+
 var Loading = require("../../common/components/loading.js");
 var Modal = require("../../common/components/modal.js");
 var PostBox = require("../../user-list/components/post-box.js");
 var AddPostBox = require("../../user-list/components/add-post-box.js");
 
-var UserList = React.createClass({
+var config = _.extend(UserComponentBase, {
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
@@ -59,27 +62,10 @@ var UserList = React.createClass({
 
         this.setState({ User: user });
     },
-
-    //
-    // TODO: Refactor.  These four methods, along with the way that their state
-    // changes affects rendering, are in user.js, too.
-    //
-    ViewPosts: function () {
-        this.setState({ IsViewingPosts: true });
-    },
-
-    HidePosts: function () {
-        this.setState({ IsViewingPosts: false });
-    },
-
-    AddPost: function () {
-        this.setState({ IsAddingPost: true });
-    },
-
-    AddPostClosed: function () {
-        this.setState({ IsAddingPost: false });
-    }
 });
+
+//var config 
+var UserList = React.createClass(config);
 
 module.exports = UserList;
 

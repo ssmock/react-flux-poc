@@ -4,18 +4,14 @@ var _ = require("lodash");
 var DOM = React.DOM;
 var EL = React.createElement;
 
+var UserComponentBase =
+    require("../../common/types/component-base/user-component-base.js");
+
 var Modal = require("../../common/components/modal.js");
 var PostBox = require("./post-box.js");
 var AddPostBox = require("./add-post-box.js");
 
-var User = React.createClass({
-    getInitialState: function () {
-        return {
-            IsViewingPosts: false,
-            IsAddingPost: false
-        };
-    },
-    
+var config = _.extend(UserComponentBase, {
     render: function () {
         var result;
 
@@ -59,7 +55,7 @@ var User = React.createClass({
             }
         }, [
             getCell(50, getDetailLink(this.props.User.id, this.props.User.id)),
-            getCell(200, 
+            getCell(200,
                 getDetailLink(this.props.User.name, this.props.User.id)),
             getCell(200, this.props.User.username),
             getCell(200, this.props.User.email),
@@ -70,24 +66,10 @@ var User = React.createClass({
         ]);
 
         return result;
-    },
-
-    ViewPosts: function () {
-        this.setState({ IsViewingPosts: true });
-    },
-
-    HidePosts: function () {
-        this.setState({ IsViewingPosts: false });
-    },
-
-    AddPost: function () {
-        this.setState({ IsAddingPost: true });
-    },
-
-    AddPostClosed: function () {
-        this.setState({ IsAddingPost: false });
     }
 });
+
+var User = React.createClass(config);
 
 function getCell(width, content) {
     return DOM.div({

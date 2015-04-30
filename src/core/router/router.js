@@ -58,7 +58,5 @@ function makeRoute(source) {
 function routeHandler() {
     var currentRouteMessage = MakeRouteChangeMessage(Router.getRoute());
 
-    console.log("FIFTEEN MINUTES YOULL NEVER GET BACK");
-
     CoreActions.RouteChanged(currentRouteMessage);
 }

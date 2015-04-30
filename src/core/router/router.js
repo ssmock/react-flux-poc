@@ -23,7 +23,9 @@ Router.GetCurrentRoute = function () {
     return message;
 };
 
-Router.init();
+var firstRoute = _(RouteConfig).keys().first();
+
+Router.init("/" + firstRoute);
 
 module.exports = Router;
 
@@ -35,7 +37,7 @@ function getRouter() {
             routeSetup["/" + key] = makeRoute(value);
         }
     });
-
+    
     return Director.Router(routeSetup);
 }
 
@@ -55,6 +57,8 @@ function makeRoute(source) {
 
 function routeHandler() {
     var currentRouteMessage = MakeRouteChangeMessage(Router.getRoute());
+
+    console.log("FIFTEEN MINUTES YOULL NEVER GET BACK");
 
     CoreActions.RouteChanged(currentRouteMessage);
 }

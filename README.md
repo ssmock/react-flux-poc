@@ -33,21 +33,22 @@ my component definition files by aliasing them:
 
 The project's gulpfile provides some simple, standard tasks for compiling with 
 [Webpack](http://webpack.github.io/).  I use CommonJS-style ``requires``, 
-including a few ``require.ensure`` to create chunks for our "top-level" 
-components and their dependencies.  See 
+including a few ``require.ensures`` to create chunks for our "top-level" 
+components and their dependencies; see 
 [Navigation and loading](#Navigation and loading) below.
 
 ## 1. Modals
 
 Creating a popup using React is pretty simple.  Once we have a modal component
-defined, the strategy is:
+defined, the rendering strategy is:
 
 1. Determine whether to render the modal component based on a flag contained by
 "launching" component's state.
 2. Set the contents of the modal component using its ``children`` property.
 
 Here is an example, where ``Modal`` is our reusable modal component, and 
-``AddPostBox`` is the component that it should contain.
+``AddPostBox`` is the component that it should contain.  (Again, ``EL`` aliases
+``React.createElement``.
 
       EL(Modal, {
           children: [
@@ -63,15 +64,15 @@ Here is an example, where ``Modal`` is our reusable modal component, and
 ## 2. Shared logic
 
 Suppose you have two components that should share some functionality: this 
-could include logic, elements to render, or styling.  You want to keep your 
-code DRY, and you also want to provide a consistent user experience.
+could include logic, child elements to render, or styling.  You want to keep 
+your code DRY, and you also want to provide a consistent user experience.
 
 My solution here was to create a "base" component configuration, and then extend
-it via ``_.extend()`` for each "derived" configuration.  
+it via ``_.extend`` for each "derived" component configuration.  
 
 Here is a very simple example of this priciple. First, we have the base object.
-Note that this is just an object that could be used to configure a React 
-component, and not a component itself.
+This is simply an object that could be used to configure a React component, and
+not a component itself.  (Or almost be used; it lacks a ``render`` method.)
 
       var MyComponentBase = {
           GetOkButton: function() {
@@ -84,7 +85,8 @@ component, and not a component itself.
       };
 
 Next, a derivation.  This overrides the OnOk method while using the 
-``GetOkayButton`` method to get a "standard" OK button.
+``GetOkayButton`` method to get a "standard" OK button.  It also introduces a
+render method.
 
       var MyDerivedComponent1 = React.createClass(_.extend(MyComponentBase, {
           render: function() {
@@ -100,10 +102,11 @@ Next, a derivation.  This overrides the OnOk method while using the
 
 ## 3. Server API access
 
-Since this is just a demo application focused on React, I didn't write any 
-server code at all, instead using
+Since the focus here is on React-centered client code, I didn't write anything
+for the server at all, instead using
 [jsonplaceholder](http://jsonplaceholder.typicode.com/) as a server API.  I'm 
-using ``POST`` and ``GET`` methods, but this is sufficient for a demonstration.
+only using ``POST`` and ``GET`` methods, but this is sufficient for a 
+demonstration.
 
 Data access is mediated by [Reflux](https://www.npmjs.com/package/reflux) stores 
 and actions.  For actual HTTP requests, I use the 

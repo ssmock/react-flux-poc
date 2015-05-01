@@ -101,19 +101,24 @@ render method.
           }
       };
 
-T
+This project uses this strategy principly in to share common methods between
+the `user` and `user-detail` components.
 
 ## 3. Server API access
 
-Since the focus here is on React-centered client code, I didn't write anything
-for the server at all, instead using
+Since the focus of this project is on React-centered client code, I didn't 
+write anything for the server at all, instead using
 [jsonplaceholder](http://jsonplaceholder.typicode.com/) as a server API.  I'm 
 only using `POST` and `GET` methods, but this is sufficient for a 
 demonstration.
 
+If you try to create more than one new post for a user, it will not work as
+expected. This is due to how jsonplaceholder handles additions -- our project
+code is just fine.
+
 Data access is mediated by [Reflux](https://www.npmjs.com/package/reflux) stores 
 and actions.  For actual HTTP requests, I use the 
-[fetch](https://www.npmjs.com/package/whatwg-fetch) module, which provides is a 
+[fetch](https://www.npmjs.com/package/whatwg-fetch) module, which provides a 
 pretty clear and compact way to make and handle requests.
 
 ## 4. Navigation and loading
@@ -121,26 +126,26 @@ pretty clear and compact way to make and handle requests.
 When it came to routing, I had a number of subgoals:
 
 *  Routes should be hash-y
+*  Routes should be centrally configured
 *  The application's current route and route change events should be exposed via
 Reflux store
-*  Routes should be centrally configured
 *  Each configured route should map to a top-level component
 *  Top-level components should receive the current route as a property; i.e.
-the route indicates which component to render, and how to do it
+the route indicates both which component to render, and how to do it
 *  Source for top-level components should be lazy loaded (by Webpack)
 
 Here's what it took to make it work, in order of salience.
 
 ### Route configuration
 
-The problems of mapping routes to components and lazy-loading them when the 
-route changes turned out to be very closely tied, due to how Webpack handles
-[dynamic requires](http://webpack.github.io/docs/context.html).  The gist of 
-this is: if you use an expression to specify which fields to `require.ensure`, 
-be prepared to get more files than you ask for.
+The problems of mapping routes to components and lazy-loading their source when
+the route changes turned out to be very closely tied, due to how Webpack 
+handles [dynamic requires](http://webpack.github.io/docs/context.html).  The 
+gist of this is: if you try to use an expression to specify which files to 
+`require.ensure`, be prepared for Webpack's chunks to be larger than expected.
 
 Because of this restriction and my reluctance to give up Webpack, I picked a 
-pretty ugly solution: the `require.ensures` would be provided via function 
+pretty ugly solution: the `require.ensures` would be provided via functions
 within the route configuration itself.  Here is an example route from the 
 configuration to demonstrate how this works:
 
@@ -154,15 +159,15 @@ configuration to demonstrate how this works:
           }
       }
 
-Explanation: `user-list` is a route; `user-list.js` is its component.  While
-I commit this code with a bad conscience, it works well within Webpack's 
-constraints.
+Explanation: `user-list` is a route; `user-list.js` is its component's source
+file.  I admit to having committed this code with a bad conscience, but it works
+well within Webpack's constraints.
 
 ### Director
 
 [flatiron director](https://www.npmjs.com/package/director) is my routing module
 of choice, especially combined with 
-[query-string](https://www.npmjs.com/package/query-string) for parsing paths to
+[query-string](https://www.npmjs.com/package/query-string) for parsing URLs to
 the fullest extent.  My director router is configured with a simple projection 
 of our lazy-loader configuration object. (See above)
 
@@ -175,7 +180,7 @@ with our Flux-style architecture.
 director's routing and Webpack's lazy component loading are brought together via
 two Reflux stores.
 
-*  `RouteStateStore` listens for route change actions, and maintains the 
+*  `RouteStateStore` listens for route change actions (above), and maintains the 
 current (route-based) state.  Accordingly, any component or store can go to 
 `RouteStateStore` for an authoritative statement of "where the application 
 is."

@@ -47,7 +47,7 @@ defined, the rendering strategy is:
 
 Here is an example, where `Modal` is our reusable modal component, and 
 `AddPostBox` is the component that it should contain.  (Again, `EL` aliases
-`React.createElement`.
+`React.createElement`.)
 
       EL(Modal, {
           children: [
@@ -64,14 +64,16 @@ Here is an example, where `Modal` is our reusable modal component, and
 
 Suppose you have two components that should share some functionality: this could
 include logic, child elements to render, or styling.  You want to keep your code 
-DRY, and you also want to provide a consistent user experience.
+DRY, and you also want to provide a consistent user experience, so centralizing
+the common bits is a good idea.
 
-My solution here was to create a "base" component configuration, and then extend
+My strategy here was to create a "base" component configuration, and then extend
 it via `_.extend` for each "derived" component configuration.  
 
-Here is a very simple example of this priciple. First, we have the base object.
-This is simply an object that could be used to configure a React component, and
-not a component itself.  (Or almost be used; it lacks a `render` method.)
+Here is a very simple example of this strategy. First, we have the base object.
+This is simply an object that is not a React component itself, but could be used 
+to configure a component.  (Or almost be used, in this case; our example lacks a
+`render` method.)
 
       var MyComponentBase = {
           GetOkButton: function() {
@@ -98,6 +100,8 @@ render method.
               alert("Derived 1 says hello.");
           }
       };
+
+T
 
 ## 3. Server API access
 

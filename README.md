@@ -32,8 +32,8 @@ my component definition files by aliasing them:
 ### Webpack
 
 The project's gulpfile provides some simple, standard tasks for compiling with 
-[Webpack](http://webpack.github.io/).  I use CommonJS-style ``requires``, 
-including a few ``require.ensures`` to create chunks for our "top-level" 
+[Webpack](http://webpack.github.io/).  I use CommonJS-style `requires`, 
+including a few `require.ensures` to create chunks for our "top-level" 
 components and their dependencies; see "Navigation and loading" below.
 
 ## 1. Modals
@@ -43,11 +43,11 @@ defined, the rendering strategy is:
 
 1. Determine whether to render the modal component based on a flag contained by
 "launching" component's state.
-2. Set the contents of the modal component using its ``children`` property.
+2. Set the contents of the modal component using its `children` property.
 
-Here is an example, where ``Modal`` is our reusable modal component, and 
-``AddPostBox`` is the component that it should contain.  (Again, ``EL`` aliases
-``React.createElement``.
+Here is an example, where `Modal` is our reusable modal component, and 
+`AddPostBox` is the component that it should contain.  (Again, `EL` aliases
+`React.createElement`.
 
       EL(Modal, {
           children: [
@@ -67,11 +67,11 @@ include logic, child elements to render, or styling.  You want to keep your code
 DRY, and you also want to provide a consistent user experience.
 
 My solution here was to create a "base" component configuration, and then extend
-it via ``_.extend`` for each "derived" component configuration.  
+it via `_.extend` for each "derived" component configuration.  
 
 Here is a very simple example of this priciple. First, we have the base object.
 This is simply an object that could be used to configure a React component, and
-not a component itself.  (Or almost be used; it lacks a ``render`` method.)
+not a component itself.  (Or almost be used; it lacks a `render` method.)
 
       var MyComponentBase = {
           GetOkButton: function() {
@@ -84,7 +84,7 @@ not a component itself.  (Or almost be used; it lacks a ``render`` method.)
       };
 
 Next, a derivation.  This overrides the OnOk method while using the 
-``GetOkayButton`` method to get a "standard" OK button.  It also introduces a
+`GetOkayButton` method to get a "standard" OK button.  It also introduces a
 render method.
 
       var MyDerivedComponent1 = React.createClass(_.extend(MyComponentBase, {
@@ -104,7 +104,7 @@ render method.
 Since the focus here is on React-centered client code, I didn't write anything
 for the server at all, instead using
 [jsonplaceholder](http://jsonplaceholder.typicode.com/) as a server API.  I'm 
-only using ``POST`` and ``GET`` methods, but this is sufficient for a 
+only using `POST` and `GET` methods, but this is sufficient for a 
 demonstration.
 
 Data access is mediated by [Reflux](https://www.npmjs.com/package/reflux) stores 
@@ -132,11 +132,11 @@ Here's what it took to make it work, in order of salience.
 The problems of mapping routes to components and lazy-loading them when the 
 route changes turned out to be very closely tied, due to how Webpack handles
 [dynamic requires](http://webpack.github.io/docs/context.html).  The gist of 
-this is: if you use an expression to specify which fields to ``require.ensure``, 
+this is: if you use an expression to specify which fields to `require.ensure`, 
 be prepared to get more files than you ask for.
 
 Because of this restriction and my reluctance to give up Webpack, I picked a 
-pretty ugly solution: the ``require.ensures`` would be provided via function 
+pretty ugly solution: the `require.ensures` would be provided via function 
 within the route configuration itself.  Here is an example route from the 
 configuration to demonstrate how this works:
 
@@ -150,7 +150,7 @@ configuration to demonstrate how this works:
           }
       }
 
-Explanation: ``user-list`` is a route; ``user-list.js`` is its component.  While
+Explanation: `user-list` is a route; `user-list.js` is its component.  While
 I commit this code with a bad conscience, it works well within Webpack's 
 constraints.
 
@@ -171,10 +171,15 @@ with our Flux-style architecture.
 director's routing and Webpack's lazy component loading are brought together via
 two Reflux stores.
 
-*  ``RouteStateStore`` listens for route change actions, and maintains the 
+*  `RouteStateStore` listens for route change actions, and maintains the 
 current (route-based) state.  Accordingly, any component or store can go to 
-``RouteStateStore`` for an authoritative statement of "where the application 
+`RouteStateStore` for an authoritative statement of "where the application 
 is."
-*  ``MainComponentStore`` is one such component.  When the state changes, 
-``MainComponentStore`` updates which top-level React component is "current," and
+*  `MainComponentStore` is one such component.  When the state changes, 
+`MainComponentStore` updates which top-level React component is "current," and
 ensures that its source is available.
+
+So to make our application work like a SPA, we simply need a single "view 
+container" component that listens for changes on the `MainComponentStore`, grabs
+the current component, and renders it on our page.  The `Main` component does
+exactly this.

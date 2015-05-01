@@ -4,9 +4,6 @@ var Reflux = require("reflux");
 var DOM = React.DOM;
 var EL = React.createElement;
 
-var Contact = require("../contact/components/contact.js");
-var InvalidRoute = require("../common/components/invalid-route.js");
-
 var MainComponentStore = require("./main-component-store.js");
 
 var Main = React.createClass({

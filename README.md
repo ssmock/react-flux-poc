@@ -34,8 +34,7 @@ my component definition files by aliasing them:
 The project's gulpfile provides some simple, standard tasks for compiling with 
 [Webpack](http://webpack.github.io/).  I use CommonJS-style ``requires``, 
 including a few ``require.ensures`` to create chunks for our "top-level" 
-components and their dependencies; see 
-[Navigation and loading](#Navigation and loading) below.
+components and their dependencies; see "Navigation and loading" below.
 
 ## 1. Modals
 
@@ -63,9 +62,9 @@ Here is an example, where ``Modal`` is our reusable modal component, and
 
 ## 2. Shared logic
 
-Suppose you have two components that should share some functionality: this 
-could include logic, child elements to render, or styling.  You want to keep 
-your code DRY, and you also want to provide a consistent user experience.
+Suppose you have two components that should share some functionality: this could
+include logic, child elements to render, or styling.  You want to keep your code 
+DRY, and you also want to provide a consistent user experience.
 
 My solution here was to create a "base" component configuration, and then extend
 it via ``_.extend`` for each "derived" component configuration.  
@@ -115,3 +114,67 @@ pretty clear and compact way to make and handle requests.
 
 ## 4. Navigation and loading
 
+When it came to routing, I had a number of subgoals:
+
+*  Routes should be hash-y
+*  The application's current route and route change events should be exposed via
+Reflux store
+*  Routes should be centrally configured
+*  Each configured route should map to a top-level component
+*  Top-level components should receive the current route as a property; i.e.
+the route indicates which component to render, and how to do it
+*  Source for top-level components should be lazy loaded (by Webpack)
+
+Here's what it took to make it work, in order of salience.
+
+### Route configuration
+
+The problems of mapping routes to components and lazy-loading them when the 
+route changes turned out to be very closely tied, due to how Webpack handles
+[dynamic requires](http://webpack.github.io/docs/context.html).  The gist of 
+this is: if you use an expression to specify which fields to ``require.ensure``, 
+be prepared to get more files than you ask for.
+
+Because of this restriction and my reluctance to give up Webpack, I picked a 
+pretty ugly solution: the ``require.ensures`` would be provided via function 
+within the route configuration itself.  Here is an example route from the 
+configuration to demonstrate how this works:
+
+      "user-list": {
+          Load: function (callback) {
+              require.ensure(["../../user-list/components/user-list.js"],
+                  function (require) {
+                      callback(
+                          require("../../user-list/components/user-list.js"));
+                  });
+          }
+      }
+
+Explanation: ``user-list`` is a route; ``user-list.js`` is its component.  While
+I commit this code with a bad conscience, it works well within Webpack's 
+constraints.
+
+### Director
+
+[flatiron director](https://www.npmjs.com/package/director) is my routing module
+of choice, especially combined with 
+[query-string](https://www.npmjs.com/package/query-string) for parsing paths to
+the fullest extent.  My director router is configured with a simple projection 
+of our lazy-loader configuration object. (See above)
+
+Route change events do not directly trigger component rendering, however. 
+Instead, they merely trigger a Reflux action.  This loose-coupling fits nicely
+with our Flux-style architecture.
+
+### Bringing it together
+
+director's routing and Webpack's lazy component loading are brought together via
+two Reflux stores.
+
+*  ``RouteStateStore`` listens for route change actions, and maintains the 
+current (route-based) state.  Accordingly, any component or store can go to 
+``RouteStateStore`` for an authoritative statement of "where the application 
+is."
+*  ``MainComponentStore`` is one such component.  When the state changes, 
+``MainComponentStore`` updates which top-level React component is "current," and
+ensures that its source is available.

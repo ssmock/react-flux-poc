@@ -101,7 +101,7 @@ render method.
           }
       };
 
-This project uses this strategy principly in to share common methods between
+This project uses this strategy principly to share common methods between
 the `user` and `user-detail` components.
 
 ## 3. Server API access
@@ -112,9 +112,9 @@ write anything for the server at all, instead using
 only using `POST` and `GET` methods, but this is sufficient for a 
 demonstration.
 
-If you try to create more than one new post for a user, it will not work as
-expected. This is due to how jsonplaceholder handles additions -- our project
-code is just fine.
+A warning: if you try to create more than one new post for a user, it will not
+work as expected. This is due to how jsonplaceholder handles POSTs -- our
+project code is just fine.
 
 Data access is mediated by [Reflux](https://www.npmjs.com/package/reflux) stores 
 and actions.  For actual HTTP requests, I use the 
@@ -139,7 +139,7 @@ Here's what it took to make it work, in order of salience.
 ### Route configuration
 
 The problems of mapping routes to components and lazy-loading their source when
-the route changes turned out to be very closely tied, due to how Webpack 
+the route changes turned out to be very closely tied together, due to how Webpack 
 handles [dynamic requires](http://webpack.github.io/docs/context.html).  The 
 gist of this is: if you try to use an expression to specify which files to 
 `require.ensure`, be prepared for Webpack's chunks to be larger than expected.
@@ -160,8 +160,10 @@ configuration to demonstrate how this works:
       }
 
 Explanation: `user-list` is a route; `user-list.js` is its component's source
-file.  I admit to having committed this code with a bad conscience, but it works
-well within Webpack's constraints.
+file.  When the route changes to `user-list`, the `Load` method will be called,
+which, using `require.ensure`, will pull down the Webpack chunk that contains
+`user-list.js`. I admit to having committed this code with a bad conscience, but 
+it works well within Webpack's constraints.
 
 ### Director
 

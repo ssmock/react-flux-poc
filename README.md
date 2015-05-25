@@ -42,7 +42,7 @@ Creating a popup using React is pretty simple.  Once we have a modal component
 defined, the rendering strategy is:
 
 1. Determine whether to render the modal component based on a flag contained by
-"launching" component's state.
+the state of the component that "launches" the modal component.
 2. Set the contents of the modal component using its `children` property.
 
 Here is an example, where `Modal` is our reusable modal component, and 
